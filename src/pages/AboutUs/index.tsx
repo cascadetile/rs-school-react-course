@@ -6,6 +6,7 @@ export class AboutUs extends React.Component {
   render(): React.ReactNode {
     return (
       <div className="about-us">
+        <div>About us</div>
         <NavMenu />
         <p className="about-us__p">
           Welcome to our website! We are a team of passionate 

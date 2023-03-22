@@ -8,6 +8,7 @@ export class Home extends React.Component {
   render(): React.ReactNode {
     return (
       <div className="home">
+        <div>Home</div>
         <NavMenu />
         <Searchbar />
         <CardGroup>
