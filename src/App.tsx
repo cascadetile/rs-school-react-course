@@ -4,7 +4,7 @@ import { AboutUs } from './pages/AboutUs';
 import './App.css';
 import { Home } from './pages/Home';
 import { PageNotFound } from './pages/PageNotFound';
-import { Form } from './pages/Form';
+import { People } from './pages/People';
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/form" element={<Form />} />
+          <Route path="/form" element={<People />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
