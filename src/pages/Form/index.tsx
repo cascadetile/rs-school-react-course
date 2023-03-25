@@ -1,4 +1,5 @@
 import React from 'react';
+import { CheckboxInput } from './CheckboxInput';
 import DateInput from './DateInput';
 import { NameInput } from './NameInput';
 import Select from './Select';
@@ -13,6 +14,7 @@ interface IState {
   errorDate: string
   select: string
   errorSelect: string
+  agree: boolean
   errorCheckbox: string
   errorGender: string
   errorFile: string
@@ -21,7 +23,7 @@ interface IState {
 interface Card {
   // date: string
   // country: string
-  agree: boolean
+  // agree: boolean
   gender: string
   file: string
 }
@@ -32,18 +34,17 @@ interface INewState {
   date?: string
   erroDate?: string
   select?: string
-  errorSeelct?: string
+  errorSelect?: string
+  agree?: boolean
+  errorAgree?: string
 }
 
 export class Form extends React.Component<Record<string, never>, IState> {
-  checkbox: React.RefObject<HTMLInputElement>;
   male: React.RefObject<HTMLInputElement>;
   female: React.RefObject<HTMLInputElement>;
   file: React.RefObject<HTMLInputElement>;
   constructor(props: Record<string, never>) {
     super(props);
-    
-    this.checkbox = React.createRef();
     this.male = React.createRef();
     this.female = React.createRef();
     this.file = React.createRef();
@@ -58,6 +59,7 @@ export class Form extends React.Component<Record<string, never>, IState> {
       errorDate: '',
       select: '',
       errorSelect: '',
+      agree: false,
       errorCheckbox: '',
       errorGender: '',
       errorFile: '',
@@ -75,18 +77,11 @@ export class Form extends React.Component<Record<string, never>, IState> {
     event.preventDefault();
     const newState = {
       ...this.state,
-      errorCheckbox: '',
       errorGender: '',
       errorFile: '',
     };
     let valid = true;
     
-    if (this.checkbox.current) {
-      if (!this.checkbox.current.checked) {
-        newState.errorCheckbox = 'You must accept the agreement';
-        valid = false;
-      }
-    }
     if (this.male.current && this.female.current) {
       if (!this.male.current.checked && !this.female.current.checked) {
         newState.errorGender = 'You must choose your gender';
@@ -105,14 +100,14 @@ export class Form extends React.Component<Record<string, never>, IState> {
         {
           // date: this.date.current!.value,
           // country: this.select.current!.value,
-          agree: this.checkbox.current!.checked,
+          // agree: this.checkbox.current!.checked,
           gender: this.male.current!.checked ? 'Male' : 'Female',
           file: this.file.current!.files![0].name
         }
       ];
       // this.date.current!.value = '';
       // this.select.current!.value = 'default';
-      this.checkbox.current!.checked = false;
+      // this.checkbox.current!.checked = false;
       this.male.current!.checked = false;
       this.female.current!.checked = false;
       this.file.current!.value = '';
@@ -130,18 +125,18 @@ export class Form extends React.Component<Record<string, never>, IState> {
             showError={this.state.showErrors}
             handleSetState={this.handleSetState}
           />
-          <DateInput 
+          <DateInput
             showError={this.state.showErrors}
             handleSetState={this.handleSetState}
           />
-          <Select 
+          <Select
             showError={this.state.showErrors}
             handleSetState={this.handleSetState}
           />
-          <input ref={this.checkbox} type="checkbox" />
-          {
-            this.state.errorCheckbox && <p>{this.state.errorCheckbox}</p>
-          }
+          <CheckboxInput
+            showError={this.state.showErrors}
+            handleSetState={this.handleSetState}
+          />
           <div>
             <label>
               <input ref={this.male} name="sex" type="radio" value="Male" />
