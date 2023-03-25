@@ -1,8 +1,11 @@
 import React from 'react';
+import { NameInput } from './NameInput';
 import './style.css';
 
 interface IState {
+  showErrors: boolean
   cards: Card[]
+  name: string
   errorName: string
   errorDate: string
   errorSelect: string
@@ -12,7 +15,6 @@ interface IState {
 }
 
 interface Card {
-  name: string
   date: string
   country: string
   agree: boolean
@@ -20,17 +22,20 @@ interface Card {
   file: string
 }
 
-export class Form extends React.Component<{}, IState> {
-  name: React.RefObject<HTMLInputElement>;
+interface INewState {
+  name?: string
+  errorName?: string
+}
+
+export class Form extends React.Component<Record<string, never>, IState> {
   date: React.RefObject<HTMLInputElement>;
   select: React.RefObject<HTMLSelectElement>;
   checkbox: React.RefObject<HTMLInputElement>;
   male: React.RefObject<HTMLInputElement>;
   female: React.RefObject<HTMLInputElement>;
   file: React.RefObject<HTMLInputElement>;
-  constructor(props: {}) {
+  constructor(props: Record<string, never>) {
     super(props);
-    this.name = React.createRef();
     this.date = React.createRef();
     this.select = React.createRef();
     this.checkbox = React.createRef();
@@ -38,8 +43,11 @@ export class Form extends React.Component<{}, IState> {
     this.female = React.createRef();
     this.file = React.createRef();
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSetState = this.handleSetState.bind(this);
     this.state = {
+      showErrors: false,
       cards: [],
+      name: '',
       errorName: '',
       errorDate: '',
       errorSelect: '',
@@ -47,6 +55,13 @@ export class Form extends React.Component<{}, IState> {
       errorGender: '',
       errorFile: '',
     }
+  }
+
+  handleSetState(newState: INewState) {
+    this.setState({
+      ...this.state,
+      ...newState
+    });
   }
 
   handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -61,15 +76,6 @@ export class Form extends React.Component<{}, IState> {
       errorFile: '',
     };
     let valid = true;
-    if (this.name.current) {
-      if (!this.name.current.value) {
-        newState.errorName = 'Name should not be empty';
-        valid = false;
-      } else if (/^[a-z]/.test(this.name.current.value)) {
-        newState.errorName = 'Name should start from uppercase';
-        valid = false;
-      }
-    }
     if (this.date.current) {
       if (!this.date.current.value) {
         newState.errorDate = 'Date should not be empty';
@@ -104,7 +110,6 @@ export class Form extends React.Component<{}, IState> {
       newState.cards = [
         ...newState.cards, 
         {
-          name: this.name.current!.value,
           date: this.date.current!.value,
           country: this.select.current!.value,
           agree: this.checkbox.current!.checked,
@@ -112,7 +117,6 @@ export class Form extends React.Component<{}, IState> {
           file: this.file.current!.files![0].name
         }
       ];
-      this.name.current!.value = '';
       this.date.current!.value = '';
       this.select.current!.value = 'default';
       this.checkbox.current!.checked = false;
@@ -129,10 +133,10 @@ export class Form extends React.Component<{}, IState> {
       <div>
         <div>Form</div>
         <form onSubmit={this.handleSubmit} className="form">
-          <input ref={this.name} type="text" />
-          {
-            this.state.errorName && <p>{this.state.errorName}</p>
-          }
+          <NameInput
+            showError={this.state.showErrors}
+            handleSetState={this.handleSetState}
+          />
           <input ref={this.date} type="date" />
           {
             this.state.errorDate && <p>{this.state.errorDate}</p>
