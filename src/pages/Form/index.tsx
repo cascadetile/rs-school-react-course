@@ -1,4 +1,5 @@
 import React from 'react';
+import DateInput from './DateInput';
 import { NameInput } from './NameInput';
 import './style.css';
 
@@ -7,6 +8,7 @@ interface IState {
   cards: Card[]
   name: string
   errorName: string
+  date: string
   errorDate: string
   errorSelect: string
   errorCheckbox: string
@@ -15,7 +17,7 @@ interface IState {
 }
 
 interface Card {
-  date: string
+  // date: string
   country: string
   agree: boolean
   gender: string
@@ -25,10 +27,11 @@ interface Card {
 interface INewState {
   name?: string
   errorName?: string
+  date?: string
+  erroDate?: string
 }
 
 export class Form extends React.Component<Record<string, never>, IState> {
-  date: React.RefObject<HTMLInputElement>;
   select: React.RefObject<HTMLSelectElement>;
   checkbox: React.RefObject<HTMLInputElement>;
   male: React.RefObject<HTMLInputElement>;
@@ -36,7 +39,6 @@ export class Form extends React.Component<Record<string, never>, IState> {
   file: React.RefObject<HTMLInputElement>;
   constructor(props: Record<string, never>) {
     super(props);
-    this.date = React.createRef();
     this.select = React.createRef();
     this.checkbox = React.createRef();
     this.male = React.createRef();
@@ -49,6 +51,7 @@ export class Form extends React.Component<Record<string, never>, IState> {
       cards: [],
       name: '',
       errorName: '',
+      date: '',
       errorDate: '',
       errorSelect: '',
       errorCheckbox: '',
@@ -76,12 +79,7 @@ export class Form extends React.Component<Record<string, never>, IState> {
       errorFile: '',
     };
     let valid = true;
-    if (this.date.current) {
-      if (!this.date.current.value) {
-        newState.errorDate = 'Date should not be empty';
-        valid = false;
-      }
-    }
+    
     if (this.select.current) {
       if (this.select.current.value === 'default') {
         newState.errorSelect = 'You did not select your country';
@@ -110,14 +108,14 @@ export class Form extends React.Component<Record<string, never>, IState> {
       newState.cards = [
         ...newState.cards, 
         {
-          date: this.date.current!.value,
+          // date: this.date.current!.value,
           country: this.select.current!.value,
           agree: this.checkbox.current!.checked,
           gender: this.male.current!.checked ? 'Male' : 'Female',
           file: this.file.current!.files![0].name
         }
       ];
-      this.date.current!.value = '';
+      // this.date.current!.value = '';
       this.select.current!.value = 'default';
       this.checkbox.current!.checked = false;
       this.male.current!.checked = false;
@@ -137,10 +135,10 @@ export class Form extends React.Component<Record<string, never>, IState> {
             showError={this.state.showErrors}
             handleSetState={this.handleSetState}
           />
-          <input ref={this.date} type="date" />
-          {
-            this.state.errorDate && <p>{this.state.errorDate}</p>
-          }
+          <DateInput 
+            showError={this.state.showErrors}
+            handleSetState={this.handleSetState}
+          />
           <select ref={this.select} defaultValue="default">
             <option disabled value="default">Select your country</option>
             <option value="BY">BY</option>
