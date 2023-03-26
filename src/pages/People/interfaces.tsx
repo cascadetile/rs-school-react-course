@@ -1,13 +1,13 @@
-interface IInputValues {
+export interface IInputValues {
   name: string
   date: string
   country: string
   agree: boolean
   gender: string
-  file: string
+  file: File | string
 }
 
-interface IFormValidatorState {
+export interface IFormValidatorState {
   errorName: string
   errorDate: string
   errorCountry: string
