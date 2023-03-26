@@ -1,6 +1,9 @@
+import { Card } from '../../components/Card';
 import React from 'react';
 import { FormValidator } from './FormValidator';
 import './style.css';
+import { CardGroup } from '../../components/CardGroup';
+import { IInputValues } from './interfaces';
 
 interface IState {
   cards: IInputValues[]
@@ -26,11 +29,29 @@ export class People extends React.Component<Record<string, never>, IState> {
 
   render(): React.ReactNode {
     return (
-      <div>
+      <div className="people">
         <div>People</div>
-        <FormValidator 
+        <FormValidator
           handleStateUpdate={this.handleStateUpdate}
         />
+        <CardGroup>
+          {
+            this.state.cards.map((card, index) => {
+              return (
+                <Card key={index}>
+                  <div className="card__img-wrapper">
+                    <img className="card__img" src={URL.createObjectURL(card.file as File)} alt="" />
+                  </div>
+                  <h3 className="card__title">Name: {card.name}</h3>
+                  <p className="card__description">Birthday: {card.date}</p>
+                  <p className="card__description">Country: {card.country}</p>
+                  <p className="card__description">Agreed: {card.agree && 'Yes'}</p>
+                  <p className="card__description">Gender: {card.gender}</p>
+                </Card>
+              )
+            })
+          }
+        </CardGroup>
       </div>
     );
   }
