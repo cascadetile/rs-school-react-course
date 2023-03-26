@@ -20,15 +20,20 @@ export class FormPeople extends React.Component<IFormProps, Record<string, never
     return (
       <>
         <form onSubmit={this.props.handleSubmit} className="form">
-          <input ref={this.props.nameRef} type="text" />
+          <label htmlFor="name">
+            Name:
+          </label>
+          <input id="name" ref={this.props.nameRef} type="text" placeholder="Name" />
           {
             this.props.errors.errorName && <p>{this.props.errors.errorName}</p>
           }
-          <input ref={this.props.dateRef} type="date" />
+          <label htmlFor="date">Birthday:</label>
+          <input id="date" ref={this.props.dateRef} type="date" />
           {
             this.props.errors.errorDate && <p>{this.props.errors.errorDate}</p>
           }
-          <select ref={this.props.countryRef} defaultValue="default">
+          <label htmlFor="country">Select your country:</label>
+          <select id="country" ref={this.props.countryRef} defaultValue="default">
             <option disabled value="default">Select your country</option>
             <option value="BY">BY</option>
             <option value="RU">RU</option>
@@ -37,11 +42,15 @@ export class FormPeople extends React.Component<IFormProps, Record<string, never
           {
             this.props.errors.errorCountry && <p>{this.props.errors.errorCountry}</p>
           }
-          <input ref={this.props.agreeRef} type="checkbox" />
+          <label>
+            <input ref={this.props.agreeRef} type="checkbox" />
+            I agree with agreement
+          </label>
           {
             this.props.errors.errorAgree && <p>{this.props.errors.errorAgree}</p>
           }
           <div>
+            Choose your gender:
             <label>
               <input ref={this.props.maleRef} name="sex" type="radio" value="Male" />
               Male
@@ -53,8 +62,9 @@ export class FormPeople extends React.Component<IFormProps, Record<string, never
           </div>
           {
             this.props.errors.errorGender && <p>{this.props.errors.errorGender}</p>
-          } 
-          <input ref={this.props.fileRef} type="file" />
+          }
+          <label htmlFor="pfp">Choose your profile picture:</label>
+          <input id="pfp" ref={this.props.fileRef} type="file" />
           {
             this.props.errors.errorFile && <p>{this.props.errors.errorFile}</p>
           } 
