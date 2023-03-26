@@ -1,6 +1,7 @@
 import React from 'react';
 import { IFormValidatorState } from '../interfaces';
 
+// TODO: change to IProps
 interface IFormProps {
   handleSubmit(event: React.FormEvent<HTMLFormElement>): void
   nameRef: React.RefObject<HTMLInputElement>

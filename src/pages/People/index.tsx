@@ -4,6 +4,7 @@ import { FormValidator } from './FormValidator';
 import './style.css';
 import { CardGroup } from '../../components/CardGroup';
 import { IInputValues } from './interfaces';
+import Notification from './Notification';
 
 interface IState {
   cards: IInputValues[]
@@ -33,6 +34,9 @@ export class People extends React.Component<Record<string, never>, IState> {
         <div>People</div>
         <FormValidator
           handleStateUpdate={this.handleStateUpdate}
+        />
+        <Notification
+          cards={this.state.cards}
         />
         <CardGroup>
           {
