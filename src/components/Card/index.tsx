@@ -1,10 +1,8 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import './style.css';
 
 interface IProps {
-  imgUrl: string
-  title: string
-  description: string
+  children: ReactNode
 }
 
 export class Card extends React.Component<IProps> {
@@ -14,11 +12,7 @@ export class Card extends React.Component<IProps> {
   render(): React.ReactNode {
     return (
       <div className="card">
-        <div className="card__img-wrapper">
-          <img className="card__img" src={this.props.imgUrl} alt="" />
-        </div>
-        <h3 className="card__title">{this.props.title}</h3>
-        <p className="card__description">{this.props.description}</p>
+        {this.props.children}
       </div>
     );
   }
