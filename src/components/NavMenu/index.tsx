@@ -8,6 +8,7 @@ export class NavMenu extends React.Component {
       <div className="nav-menu">
         <NavLink to="/">Home</NavLink>
         <NavLink to="/about-us">About Us</NavLink>
+        <NavLink to="/form">Form</NavLink>
       </div>
     );
   }
