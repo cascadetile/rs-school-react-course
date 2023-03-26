@@ -24,55 +24,55 @@ export class FormPeople extends React.Component<IFormProps, Record<string, never
       <>
         <form onSubmit={this.props.handleSubmit} className="form">
           <fieldset ref={this.props.fieldsetRef}>
-            <label htmlFor="name">
+            <label className="form__label" htmlFor="name">
               Name:
             </label>
-            <input id="name" ref={this.props.nameRef} type="text" placeholder="Name" />
+            <input className="form__name" id="name" ref={this.props.nameRef} type="text" placeholder="Name" />
             {
-              this.props.errors.errorName && <p>{this.props.errors.errorName}</p>
+              this.props.errors.errorName && <p className="form__error">{this.props.errors.errorName}</p>
             }
-            <label htmlFor="date">Birthday:</label>
-            <input id="date" ref={this.props.dateRef} type="date" />
+            <label className="form__label" htmlFor="date">Birthday:</label>
+            <input className="form__birthday" id="date" ref={this.props.dateRef} type="date" />
             {
-              this.props.errors.errorDate && <p>{this.props.errors.errorDate}</p>
+              this.props.errors.errorDate && <p className="form__error">{this.props.errors.errorDate}</p>
             }
-            <label htmlFor="country">Select your country:</label>
-            <select id="country" ref={this.props.countryRef} defaultValue="default">
-              <option disabled value="default">Select your country</option>
-              <option value="BY">BY</option>
-              <option value="RU">RU</option>
-              <option value="KZ">KZ</option>
+            <label className="form__label" htmlFor="country">Select your country:</label>
+            <select className="form__country" id="country" ref={this.props.countryRef} defaultValue="default">
+              <option className="form__country-option" disabled value="default">Select your country</option>
+              <option className="form__country-option" value="BY">BY</option>
+              <option className="form__country-option" value="RU">RU</option>
+              <option className="form__country-option" value="KZ">KZ</option>
             </select>
             {
-              this.props.errors.errorCountry && <p>{this.props.errors.errorCountry}</p>
+              this.props.errors.errorCountry && <p className="form__error">{this.props.errors.errorCountry}</p>
             }
-            <label>
-              <input ref={this.props.agreeRef} type="checkbox" />
+            <label className="form__label">
+              <input className="form__agree" ref={this.props.agreeRef} type="checkbox" />
               I agree with agreement
             </label>
             {
-              this.props.errors.errorAgree && <p>{this.props.errors.errorAgree}</p>
+              this.props.errors.errorAgree && <p className="form__error">{this.props.errors.errorAgree}</p>
             }
             <div>
               Choose your gender:
-              <label>
-                <input ref={this.props.maleRef} name="sex" type="radio" value="Male" />
+              <label className="form__label">
+                <input className="form__gender" ref={this.props.maleRef} name="sex" type="radio" value="Male" />
                 Male
               </label>
-              <label>
-                <input ref={this.props.femaleRef} name="sex" type="radio" value="Female" />
+              <label className="form__label">
+                <input className="form__gender" ref={this.props.femaleRef} name="sex" type="radio" value="Female" />
                 Female
               </label>
             </div>
             {
-              this.props.errors.errorGender && <p>{this.props.errors.errorGender}</p>
+              this.props.errors.errorGender && <p className="form__error">{this.props.errors.errorGender}</p>
             }
-            <label htmlFor="pfp">Choose your profile picture:</label>
-            <input id="pfp" ref={this.props.fileRef} type="file" />
+            <label className="form__label" htmlFor="pfp">Choose your profile picture:</label>
+            <input className="form__pfp" id="pfp" ref={this.props.fileRef} type="file" />
             {
-              this.props.errors.errorFile && <p>{this.props.errors.errorFile}</p>
+              this.props.errors.errorFile && <p className="form__error">{this.props.errors.errorFile}</p>
             } 
-            <input type="submit" value="Send" />
+            <input className="form__submit" type="submit" value="Send" />
           </fieldset>
         </form>
       </>

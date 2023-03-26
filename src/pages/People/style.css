@@ -9,16 +9,14 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  border: 2px solid #ccc;
-  border-radius: 10px;
   max-width: 400px;
   margin: 0 auto;
 }
 
-input[type="text"],
-input[type="date"],
-select,
-input[type="file"] {
+.form__name,
+.form__birthday,
+.form__country,
+.form__pfp {
   display: block;
   margin: 10px 0;
   padding: 8px 10px;
@@ -29,27 +27,27 @@ input[type="file"] {
   box-sizing: border-box;
 }
 
-select {
+.form__country {
   padding: 8px 40px 8px 10px;
   background-color: transparent;
 }
 
-option {
+.form__country-option {
   background-color: black;
 }
 
-input[type="checkbox"],
-input[type="radio"] {
+.form__agree,
+.form__gender {
   margin-right: 10px;
 }
 
-label {
+.form__label {
   display: flex;
   align-items: center;
   margin: 10px 0;
 }
 
-input[type="submit"] {
+.form__submit {
   margin: 20px 0;
   padding: 10px 20px;
   font-size: 16px;
@@ -61,11 +59,20 @@ input[type="submit"] {
   transition: background-color 0.2s ease-in-out;
 }
 
-input[type="submit"]:hover {
+.form__submit:disabled {
+  background-color: #9b9c9c;
+  color: rgb(36, 36, 36);
+}
+
+.form__submit:hover {
   background-color: #0062cc;
 }
 
-p {
+.form__submit:disabled:hover {
+  background-color: #8d8d8d;
+}
+
+.form__error {
   margin: 5px 0;
   color: red;
 }
