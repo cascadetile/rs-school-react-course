@@ -3,17 +3,21 @@ import { render } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import Card from './index';
 
-describe('Card', () => {
-  const props = {
-    imgUrl: 'https://example.com/image.jpg',
-    title: 'Example Title',
-    description: 'Example Description',
-  };
+describe('Card component', () => {
+  it('renders children', () => {
+    const { getByText } = render(
+      <Card>
+        <h2>Card Title</h2>
+        <p>Card Description</p>
+      </Card>
+    );
 
-  it('should render with the correct props', () => {
-    const { getByAltText, getByText } = render(<Card {...props} />);
-    expect(getByAltText('')).toHaveAttribute('src', props.imgUrl);
-    expect(getByText(props.title)).toBeInTheDocument();
-    expect(getByText(props.description)).toBeInTheDocument();
+    expect(getByText('Card Title')).toBeInTheDocument();
+    expect(getByText('Card Description')).toBeInTheDocument();
+  });
+
+  it('renders with correct class name', () => {
+    const { container } = render(<Card><h2>Card Title</h2></Card>);
+    expect(container.firstChild).toHaveClass('card');
   });
 });
