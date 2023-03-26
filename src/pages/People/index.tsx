@@ -1,6 +1,6 @@
 import { Card } from '../../components/Card';
 import React from 'react';
-import { FormWrapper } from './FormValidator';
+import { FormWrapper } from './FormWrapper';
 import './style.css';
 import { CardGroup } from '../../components/CardGroup';
 import { IInputValues } from './interfaces';
