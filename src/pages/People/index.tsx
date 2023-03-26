@@ -1,6 +1,6 @@
 import { Card } from '../../components/Card';
 import React from 'react';
-import { FormValidator } from './FormValidator';
+import { FormWrapper } from './FormValidator';
 import './style.css';
 import { CardGroup } from '../../components/CardGroup';
 import { IInputValues } from './interfaces';
@@ -32,7 +32,7 @@ export class People extends React.Component<Record<string, never>, IState> {
     return (
       <div className="people">
         <div>People</div>
-        <FormValidator
+        <FormWrapper
           handleStateUpdate={this.handleStateUpdate}
         />
         <Notification

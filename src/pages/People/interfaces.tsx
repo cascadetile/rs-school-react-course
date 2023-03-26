@@ -7,7 +7,7 @@ export interface IInputValues {
   file: File | string
 }
 
-export interface IFormValidatorState {
+export interface IFormWrapperState {
   errorName: string
   errorDate: string
   errorCountry: string
