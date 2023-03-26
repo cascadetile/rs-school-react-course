@@ -1,4 +1,5 @@
 import React from 'react';
+import { IFormValidatorState } from '../interfaces';
 
 interface IFormProps {
   handleSubmit(event: React.FormEvent<HTMLFormElement>): void

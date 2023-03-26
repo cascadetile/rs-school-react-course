@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormPeople } from '../Form';
+import { IFormValidatorState, IInputValues } from '../interfaces';
 
 interface IProps {
   handleStateUpdate: (newState: IInputValues) => void
@@ -82,7 +83,7 @@ export class FormValidator extends React.Component<IProps, IFormValidatorState> 
           country: this.country.current.value !== 'default' ? this.country.current.value : '',
           agree: this.agree.current.checked ?? false,
           gender: this.getGenderValue(),
-          file: this.file.current.files?.length ? this.file.current.files[0].name : '',
+          file: this.file.current.files?.length ? this.file.current.files[0] : '',
         });
         this.name.current.value = '';
         this.date.current.value = '';
