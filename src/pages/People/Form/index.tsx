@@ -1,9 +1,10 @@
 import React from 'react';
-import { IFormValidatorState } from '../interfaces';
+import { IFormWrapperState } from '../interfaces';
 
 // TODO: change to IProps
 interface IFormProps {
   handleSubmit(event: React.FormEvent<HTMLFormElement>): void
+  formRef: React.RefObject<HTMLFormElement>
   nameRef: React.RefObject<HTMLInputElement>
   dateRef: React.RefObject<HTMLInputElement>
   countryRef: React.RefObject<HTMLSelectElement>
@@ -12,7 +13,7 @@ interface IFormProps {
   femaleRef: React.RefObject<HTMLInputElement>
   fileRef: React.RefObject<HTMLInputElement>
   fieldsetRef: React.RefObject<HTMLFieldSetElement>
-  errors: IFormValidatorState
+  errors: IFormWrapperState
 }
 
 export class FormPeople extends React.Component<IFormProps, Record<string, never>> {
@@ -22,7 +23,7 @@ export class FormPeople extends React.Component<IFormProps, Record<string, never
   render(): React.ReactNode {
     return (
       <>
-        <form onSubmit={this.props.handleSubmit} className="form">
+        <form ref={this.props.formRef} onSubmit={this.props.handleSubmit} className="form">
           <fieldset ref={this.props.fieldsetRef}>
             <label className="form__label" htmlFor="name">
               Name:

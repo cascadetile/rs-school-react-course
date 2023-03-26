@@ -8,6 +8,7 @@ interface IProps {
 }
 
 export class FormWrapper extends React.Component<IProps, IFormWrapperState> {
+  form: React.RefObject<HTMLFormElement>;
   name: React.RefObject<HTMLInputElement>;
   date: React.RefObject<HTMLInputElement>;
   country: React.RefObject<HTMLSelectElement>;
@@ -19,6 +20,7 @@ export class FormWrapper extends React.Component<IProps, IFormWrapperState> {
   validator: FormValidator;
   constructor(props: IProps) {
     super(props);
+    this.form = React.createRef();
     this.name = React.createRef();
     this.date = React.createRef();
     this.country = React.createRef();
@@ -68,27 +70,7 @@ export class FormWrapper extends React.Component<IProps, IFormWrapperState> {
           if (this.fieldset.current) {
             this.fieldset.current.disabled = false;
           }
-          if (this.name.current) {
-            this.name.current.value = '';
-          }
-          if (this.date.current) {
-            this.date.current.value = '';
-          }
-          if (this.country.current) {
-            this.country.current.value = 'default';
-          }
-          if (this.agree.current) {
-            this.agree.current.checked = false;
-          }
-          if (this.male.current) {
-            this.male.current.checked = false;
-          }
-          if (this.female.current) {
-            this.female.current.checked = false;
-          }
-          if (this.file.current) {
-            this.file.current.value = '';
-          }
+          this.form.current?.reset();
         }, 3000);
       }
       this.setState(errors);
@@ -112,6 +94,7 @@ export class FormWrapper extends React.Component<IProps, IFormWrapperState> {
       <>
         <FormPeople
           handleSubmit={this.handleSubmit}
+          formRef={this.form}
           nameRef={this.name}
           dateRef={this.date}
           countryRef={this.country}
